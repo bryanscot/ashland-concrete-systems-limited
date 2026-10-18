@@ -75,7 +75,7 @@
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <h1 id="hero-title">Concrete blocks, pavers and kerbs from Thika.</h1>
-        <p><p><span style="font-size: 1.6em; font-weight: 1000; color: #ffffff;   margin-bottom: 8px; line-height: 1.2;">Ashland Concrete Systems Limited</span> is a concrete products manufacturer and supplier based at Murang'a Industrial Park, Makenji, in Thika, Kenya.</p> supplies cabro paving, hollow blocks and kerb units from Murang'a Industrial Park, Makenji. Every product is listed with its exact size, so you can pick, ask, and get a quotation without the guesswork.</p>
+        <p><span style="font-size: 1.6em; font-weight: 1000; color: #ffffff;   margin-bottom: 8px; line-height: 1.2;">Ashland Concrete Systems Limited</span> supplies cabro paving, hollow blocks and kerb units from Murang'a Industrial Park, Makenji. Every product is listed with its exact size, so you can pick, ask, and get a quotation without the guesswork.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#products">Explore Our Products</a>
           <a class="btn btn-ghost" href="#quote">Get a Quote</a>
@@ -184,8 +184,18 @@
           <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name"><p class="error" id="e-name" hidden></p></div>
         <div class="field"><label for="f-phone">Phone number <span aria-hidden="true">*</span></label>
           <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="e-phone"><p class="error" id="e-phone" hidden></p></div>
-        <div class="field"><label for="f-product">Product of interest</label>
-          <select id="f-product" name="product"></select></div>
+        <div class="field">
+  <label for="f-product-btn">Product of interest</label>
+  <div class="combo" id="product-combo">
+    <button type="button" class="combo-btn" id="f-product-btn" role="combobox"
+            aria-haspopup="listbox" aria-expanded="false" aria-controls="product-listbox">
+      <span class="combo-label">Select a product (optional)</span>
+    </button>
+    <ul class="combo-list" id="product-listbox" role="listbox" hidden></ul>
+    <!-- Real field: still filled by main.js and read on submit -->
+    <select id="f-product" name="product" hidden aria-hidden="true" tabindex="-1"></select>
+  </div>
+</div>
         <p class="list-notice" id="list-notice" hidden></p>
         <div class="row">
           <div class="field"><label for="f-qty">Quantity (if known)</label><input id="f-qty" name="quantity" type="text" placeholder="e.g. 2,000 pieces"></div>
@@ -257,5 +267,7 @@
 <script src="js/products.js"></script>
 <script src="js/whatsapp.js"></script>
 <script src="js/main.js"></script>
+
+<script src="js/product-select.js"></script>
 </body>
 </html>
