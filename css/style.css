@@ -92,7 +92,7 @@ p{margin:0 0 1em}
 .grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
 .card-media{border:0;padding:0;background:var(--concrete);cursor:pointer;display:block;width:100%}
-.card-media img{width:100%;aspect-ratio:4/3;object-fit:contain;padding:.75rem}
+.card-media img{width:100%;aspect-ratio:4/3;object-fit:cover;padding:.75rem}
 .dims{display:grid;grid-template-columns:repeat(3,1fr);background:var(--navy);color:var(--steel);text-align:center;font-size:.8rem}
 .dims span{padding:.55rem .25rem;border-right:1px solid rgba(255,255,255,.18)}
 .dims span:last-child{border:0}
@@ -186,7 +186,7 @@ dialog::backdrop{background:rgba(13,28,61,.7)}
 .pd-grid{display:grid;gap:1.25rem}
 @media (min-width:720px){.pd-grid{grid-template-columns:1.1fr 1fr}}
 .pd-images{display:grid;gap:.6rem;align-content:start}
-.pd-images img{width:100%;border-radius:8px;background:var(--concrete);max-height:300px;object-fit:contain}
+.pd-images img{width:100%;border-radius:8px;background:var(--concrete);max-height:300px;object-fit:cover}
 .pd-info table{width:100%;border-collapse:collapse;margin:1rem 0}
 .pd-info th,.pd-info td{text-align:left;padding:.55rem .25rem;border-bottom:1px solid var(--line)}
 .pd-info td{font:600 1.4rem var(--font-display);color:var(--navy)}
