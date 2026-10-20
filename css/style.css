@@ -261,4 +261,89 @@ dialog::backdrop{background:rgba(13,28,61,.7)}
 }
 
 
+/* Animations: hero entrance + product cards (all disabled by the reduced-motion rule below) */
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+@keyframes slide-in{from{opacity:0;transform:translateX(36px) scale(.97)}}
+.hero-copy h1{animation:rise .7s cubic-bezier(.2,.7,.2,1) .05s both}
+.hero-copy p{animation:rise .7s cubic-bezier(.2,.7,.2,1) .2s both}
+.hero-actions{animation:rise .7s cubic-bezier(.2,.7,.2,1) .35s both}
+.hero-figure{animation:slide-in .9s cubic-bezier(.2,.7,.2,1) .2s both}
+.card{transition:transform .28s ease,box-shadow .28s ease}
+.card-media{overflow:hidden}
+.card-media img{transition:transform .5s ease}
+.card.will-reveal{opacity:0;transform:translateY(28px)}
+.card.will-reveal.is-in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){
+  .card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(20,40,84,.18)}
+  .card:hover .card-media img{transform:scale(1.045)}
+}
+
+
+/* Buttons: hover lift + press, and a soft pulse on the floating WhatsApp button */
+.btn{transition:background .2s,color .2s,border-color .2s,transform .15s ease,box-shadow .2s ease}
+@media (hover:hover){
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(20,40,84,.22)}
+}
+.btn:active{transform:translateY(0) scale(.97);box-shadow:none}
+
+.wa-float:active{transform:scale(.94)}
+.wa-float::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  border:2px solid var(--wa);opacity:0;pointer-events:none;
+  animation:wa-pulse 2.7s ease-out 2s infinite;
+}
+@keyframes wa-pulse{
+  0%{transform:scale(1);opacity:.55}
+  30%{transform:scale(1.7);opacity:0}
+  100%{transform:scale(1.7);opacity:0}
+}
+
+/* Section reveals */
+.reveal{opacity:0;transform:translateY(24px)}
+.reveal.is-in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+
+
+/* Header on scroll */
+.site-header{transition:box-shadow .3s ease}
+.brand img{transition:transform .3s ease;transform-origin:left center}
+.site-header.is-scrolled{box-shadow:0 4px 18px rgba(20,40,84,.14)}
+.site-header.is-scrolled .brand img{transform:scale(.85)}
+
+
+/* FAQ: smooth open/close + plus icon that turns into a cross */
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:48px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;font:500 1.6rem/1 var(--font-body);color:var(--blue);transition:transform .3s ease}
+details[open] summary::after{transform:rotate(45deg)}
+
+details{interpolate-size:allow-keywords}
+details::details-content{height:0;overflow:clip;opacity:0;
+  transition:height .35s ease,opacity .35s ease,content-visibility .35s allow-discrete}
+details[open]::details-content{height:auto;opacity:1}
+
+
+
+/* Quote list feedback */
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.45)}100%{transform:scale(1)}}
+[data-add].pop{animation:pop .35s ease}
+.list-btn .count.bump{animation:bump .4s ease}
+[data-add][aria-pressed="true"]{background:var(--navy);color:#fff}
+
+
+
+/* Applications gallery: slow zoom + caption slides up over the image */
+.gallery figure{position:relative}
+.gallery img{transition:transform .6s ease}
+.gallery figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:2.6rem 1rem .85rem;color:#fff;
+  background:linear-gradient(to top,rgba(13,28,61,.9),rgba(13,28,61,0));
+}
+@media (hover:hover){
+  .gallery figcaption{transform:translateY(100%);opacity:0;transition:transform .4s ease,opacity .4s ease}
+  .gallery figure:hover figcaption{transform:none;opacity:1}
+  .gallery figure:hover img{transform:scale(1.06)}
+}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
