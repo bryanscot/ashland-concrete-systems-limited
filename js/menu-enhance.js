@@ -70,3 +70,50 @@
   });
   update();
 })();
+
+
+
+
+/* Phone back button closes the mobile menu (instead of leaving the page) */
+(function () {
+  "use strict";
+  var nav = document.getElementById("site-nav");
+  var toggle = document.querySelector(".menu-toggle");
+  if (!nav || !toggle || !window.history || !history.pushState) return;
+
+  var pendingTarget = null;
+  function isOpen() { return toggle.getAttribute("aria-expanded") === "true"; }
+  function menuEntry() { return history.state && history.state.menu === true; }
+
+  // Menu opened -> add a history entry. Menu closed by X / outside tap / Esc -> remove that entry.
+  new MutationObserver(function () {
+    if (isOpen()) {
+      if (!menuEntry()) history.pushState({ menu: true }, "", location.href);
+    } else if (menuEntry()) {
+      history.back();
+    }
+  }).observe(toggle, { attributes: true, attributeFilter: ["aria-expanded"] });
+
+  // Back button pressed -> close the menu (and finish any pending link jump)
+  window.addEventListener("popstate", function () {
+    if (isOpen()) toggle.click();
+    setTimeout(runPending, 80); // after the browser finishes restoring scroll
+  });
+
+  // Tapping a menu link: close via history, then scroll (keeps the history clean, no stray entries)
+  nav.addEventListener("click", function (e) {
+    var a = e.target.closest('ul a[href^="#"]');
+    if (!a || !isOpen()) return;
+    var target = document.querySelector(a.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
+    pendingTarget = target;
+    setTimeout(runPending, 400); // safety net if popstate never fires
+  }, true);
+
+  function runPending() {
+    if (!pendingTarget) return;
+    var t = pendingTarget; pendingTarget = null;
+    t.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+})();
