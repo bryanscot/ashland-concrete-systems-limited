@@ -290,7 +290,7 @@ dialog::backdrop{background:rgba(13,28,61,.7)}
 .wa-float::before{
   content:"";position:absolute;inset:0;border-radius:50%;
   border:2px solid var(--wa);opacity:0;pointer-events:none;
-  animation:wa-pulse 2.7s ease-out 2s infinite;
+  animation:wa-pulse 2.2s ease-out 2s infinite;
 }
 @keyframes wa-pulse{
   0%{transform:scale(1);opacity:.55}
