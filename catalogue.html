@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product Catalogue | Ashland Concrete Systems Limited</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="assets/logo/favicon-48.png">
+<style>
+:root{--navy:#16284f;--blue:#1a74d1;--grey:#7a8190;--alt:#f3f5f9;--line:#d5dae3;--txt:#2a3140}
+*{box-sizing:border-box}
+body{margin:0;background:#e9ecf1;font:11pt/1.45 Carlito,Calibri,"Segoe UI",Arial,sans-serif;color:var(--txt);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.toolbar{position:sticky;top:0;z-index:5;display:flex;gap:.75rem;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:.75rem 1rem;background:var(--navy);color:#fff}
+.toolbar a,.toolbar button{font:600 1rem Arial,sans-serif;border-radius:8px;padding:.6rem 1.1rem;min-height:44px;cursor:pointer;text-decoration:none}
+.toolbar .back{color:#fff;border:2px solid rgba(255,255,255,.5);background:none}
+.toolbar .print{background:var(--blue);color:#fff;border:2px solid var(--blue)}
+.toolbar small{flex-basis:100%;color:#c9d3e6;font:.85rem Arial,sans-serif}
+.sheet{max-width:210mm;margin:1rem auto;background:#fff;padding:12mm 14mm 22mm;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+.letterhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding-bottom:6mm;border-bottom:1.6mm solid var(--navy);margin-bottom:6mm}
+.letterhead img{width:36mm;height:auto}
+.letterhead div{text-align:right;color:var(--grey);font-size:9.2pt}
+.letterhead b{display:block;color:var(--navy);font-size:15pt}
+h1{margin:0 0 1mm;font-size:26pt;line-height:1.1;color:var(--navy)}
+.sub{color:var(--grey);margin:0 0 5mm}
+h2{margin:0 0 1mm;font-size:17pt;color:var(--navy)}
+.desc{color:var(--grey);font-size:9.6pt;margin:0 0 4mm}
+.banner{display:block;width:100%;aspect-ratio:17/4;object-fit:cover;margin-bottom:4mm;break-after:avoid}
+table.sum{width:100%;border-collapse:collapse;font-size:9.4pt;margin-top:3mm}
+table.sum th{background:var(--navy);color:#fff;text-align:left;padding:1.6mm 2.4mm}
+table.sum td{padding:1.6mm 2.4mm;border-bottom:.3mm solid var(--line)}
+table.sum tr:nth-child(even) td{background:var(--alt)}
+.cat{break-before:page}
+.product{display:grid;grid-template-columns:58mm 1fr;border:.3mm solid var(--line);margin-bottom:4mm;break-inside:avoid}
+.product .pic{background:var(--alt);display:grid;place-items:center;padding:3mm}
+.product .pic img{width:100%;height:46mm;object-fit:contain}
+.product .info{padding:3.5mm 4mm}
+.product h3{margin:0 0 2mm;font-size:16pt;color:var(--navy)}
+.dims{display:grid;grid-template-columns:repeat(3,1fr);background:var(--navy);color:#fff;text-align:center}
+.dims span{padding:1.5mm 1mm;border-right:.3mm solid #3a4c78;font-size:7.6pt;color:#c9d3e6;font-weight:700;letter-spacing:.02em}
+.dims span:last-child{border:0}
+.dims b{display:block;font-size:19pt;line-height:1.1;color:#fff}
+.product p{margin:2.5mm 0 1.5mm;font-size:10pt}
+.product a{color:var(--blue);font-weight:700;text-decoration:none;font-size:9.6pt}
+.steps{border-collapse:collapse;width:100%;font-size:9.6pt;margin:2mm 0 4mm}
+.steps th{background:var(--navy);color:#fff;text-align:left;padding:1.6mm 2.4mm}
+.steps td{padding:1.6mm 2.4mm;border-bottom:.3mm solid var(--line)}
+.steps td:first-child{width:14mm}
+.note{color:var(--grey);font-style:italic;font-size:8.8pt}
+.foot{margin-top:5mm;font-size:9.4pt}
+@media (max-width:700px){.sheet{margin:0;padding:6mm 5mm;box-shadow:none}.product{grid-template-columns:1fr}.letterhead{flex-direction:column}.letterhead div{text-align:left}}
+@page{size:A4;margin:10mm 12mm 18mm;
+  @bottom-left{content:"Ashland Concrete Systems Limited · Product Catalogue";font:8pt Carlito,Calibri,Arial,sans-serif;color:#7a8190}
+  @bottom-right{content:"Page " counter(page) " of " counter(pages);font:8pt Carlito,Calibri,Arial,sans-serif;color:#7a8190}}
+@media print{
+  body{background:#fff}.toolbar{display:none}
+  .sheet{margin:0;padding:0;max-width:none;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <a class="back" href="index.html#products">← Back to website</a>
+  <button class="print" type="button" onclick="window.print()">Print / Save as PDF</button>
+  <small>Tip: in the print window choose “Save as PDF” as the destination, paper size A4, and turn on “Background graphics”.</small>
+</div>
+<main class="sheet" id="catalogue"><noscript>The catalogue needs JavaScript. Please call 0769 872 363.</noscript></main>
+
+<script src="js/config.js"></script>
+<script src="js/products.js"></script>
+<script src="js/whatsapp.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.ASHLAND_CONFIG, P = window.ASHLAND_PRODUCTS, WA = window.AshlandWA;
+  var cats = window.ASHLAND_CATEGORIES.filter(function (c) { return c.id !== "all"; });
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+  var fmt = function (n) { return String(n); };
+  var byCat = function (id) { return P.filter(function (p) { return p.category === id; }); };
+  var catLabel = {}; cats.forEach(function (c) { catLabel[c.id] = c.label; });
+  var catIntro = { paving: "Concrete paving blocks and pavers.", blocks: "Three-cell hollow concrete blocks in different widths.", kerbs: "Concrete kerb units for road and landscape edging." };
+
+  function row(p) {
+    var d = p.dims;
+    return '<article class="product"><div class="pic"><img src="' + esc(p.image) + '" alt="' + esc(p.alt || p.name) + '"></div>' +
+      '<div class="info"><h3>' + esc(p.name) + '</h3>' +
+      '<div class="dims"><span><b>' + fmt(d.l) + '</b>LENGTH (mm)</span><span><b>' + fmt(d.w) + '</b>WIDTH (mm)</span><span><b>' + fmt(d.h) + '</b>HEIGHT (mm)</span></div>' +
+      '<p>' + esc(p.description) + '</p>' +
+      '<a href="' + WA.whatsappLink(WA.productMessage(p)) + '">Enquire on WhatsApp →</a></div></article>';
+  }
+
+  var hero = P.find(function (p) { return p.id === "cabro-80"; }) || P[0];
+  var html =
+    '<div class="letterhead"><img src="assets/logo/ashland-logo.png" alt="Ashland Concrete Systems Ltd logo">' +
+    '<div><b>ASHLAND CONCRETE SYSTEMS LIMITED</b>' + esc(C.locationLine) + ' · ' + esc(C.postalLine) + '<br>Tel: ' + esc(C.phoneDisplay) + '</div></div>' +
+    '<h1>PRODUCT CATALOGUE</h1><p class="sub">Concrete products from Thika, Kenya — exact sizes, quotation on request</p>' +
+    '<img class="banner" src="' + esc(hero.inUseImage) + '" alt="">' +
+    '<p>' + P.length + ' concrete products, each listed with its exact length, width and height in millimetres. Prices are by quotation: tap any <b>Enquire on WhatsApp</b> link, or call <b>' + esc(C.phoneDisplay) + '</b>, and tell us the product, quantity and your project location.</p>' +
+    '<table class="sum"><thead><tr><th>Product</th><th>Category</th><th>Size (L × W × H)</th></tr></thead><tbody>' +
+    cats.map(function (c) { return byCat(c.id); }).reduce(function (a, b) { return a.concat(b); }, []).map(function (p) {
+      return '<tr><td>' + esc(p.name) + '</td><td>' + esc(catLabel[p.category] || p.category) + '</td><td>' + esc(WA.formatDims(p)) + '</td></tr>'; }).join("") +
+    '</tbody></table>';
+
+  cats.forEach(function (c) {
+    var list = byCat(c.id); if (!list.length) return;
+    html += '<section class="cat"><img class="banner" src="' + esc(list[0].inUseImage) + '" alt="">' +
+      '<h2>' + esc(c.label) + '</h2><p class="desc">' + esc(catIntro[c.id] || "") + '</p>' + list.map(row).join("") + '</section>';
+  });
+
+  html += '<section class="cat"><h2>How to request a quotation</h2>' +
+    '<table class="steps"><thead><tr><th>Step</th><th>What to do</th></tr></thead><tbody>' +
+    '<tr><td>1</td><td>Choose your product or products from this catalogue.</td></tr>' +
+    '<tr><td>2</td><td>Tap <b>Enquire on WhatsApp</b> on the product, or message us on WhatsApp / call <b>' + esc(C.phoneDisplay) + '</b>.</td></tr>' +
+    '<tr><td>3</td><td>Tell us the quantity you need and your project location.</td></tr>' +
+    '<tr><td>4</td><td>We reply with a quotation and availability.</td></tr></tbody></table>' +
+    '<p class="note">Notes: dimensions are length × width × height in millimetres. Product images are for illustration. Prices are by quotation. Please confirm with us that a product is suitable for your project before ordering.</p>' +
+    '<p class="foot"><b>' + esc(C.companyName) + '</b><br>' + esc(C.locationLine) + ' · ' + esc(C.postalLine) + '<br>Telephone: ' + esc(C.phoneDisplay) + '</p></section>';
+
+  document.getElementById("catalogue").innerHTML = html;
+})();
+</script>
+</body>
+</html>
