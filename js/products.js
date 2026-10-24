@@ -108,6 +108,18 @@ window.ASHLAND_PRODUCTS = [
     shownIn:
       "Flyer shows the pavers laid as a garden walkway in a multi-colour pattern.",
   },
+  {
+    id: "pavers-90",
+    name: "Ashland Pavers 90",
+    category: "paving",
+    dims: { l: 250, w: 144, h: 90 },
+    image: "assets/images/ashland-pavers-60-block.jpg",
+    inUseImage: "assets/images/ashland-pavers-60-walkway.jpg",
+    alt: "Ashland Pavers 90, an angular concrete paver",
+    description: "Angular-profile concrete paver, 90 mm thick.",
+    shownIn:
+      "Flyer shows the pavers laid as a garden walkway in a multi-colour pattern.",
+  },
 ];
 
 window.ASHLAND_CATEGORIES = [

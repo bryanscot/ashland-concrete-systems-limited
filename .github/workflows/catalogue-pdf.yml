@@ -1,0 +1,41 @@
+name: Build catalogue PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "js/products.js"
+      - "js/config.js"
+      - "js/whatsapp.js"
+      - "catalogue.html"
+      - "assets/images/**"
+      - "assets/logo/**"
+      - "tools/make_catalogue_pdf.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Chromium
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+      - name: Build PDF
+        run: python tools/make_catalogue_pdf.py
+      - name: Commit PDF if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/Ashland-Product-Catalogue.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "Update catalogue PDF"
+            git push
+          fi
