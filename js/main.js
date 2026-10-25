@@ -158,17 +158,45 @@
   function openProduct(id) {
     const p = byId(id), d = p.dims;
     pDlg.innerHTML =
-      '<div class="dlg-head"><h2 id="pd-title">' + esc(p.name) + '</h2><button class="dlg-close" type="button" data-close aria-label="Close details">×</button></div>' +
+      '<div class="dlg-head"><h2 id="pd-title">' +
+      esc(p.name) +
+      '</h2><button class="dlg-close" type="button" data-close aria-label="Close details">×</button></div>' +
       '<div class="pd-grid"><div class="pd-images">' +
-      '<img src="' + p.image + '" alt="' + esc(p.alt) + '">' +
-      '<img src="' + p.inUseImage + '" alt="Illustrative image of ' + esc(p.name) + ' in use" loading="lazy">' +
-      '</div><div class="pd-info"><p>' + esc(p.description) + '</p>' +
-      '<table><caption class="sr-only">Dimensions of ' + esc(p.name) + '</caption><tbody>' +
-      '<tr><th scope="row">Length</th><td>' + d.l + ' mm</td></tr><tr><th scope="row">Width</th><td>' + d.w + ' mm</td></tr><tr><th scope="row">Height</th><td>' + d.h + ' mm</td></tr></tbody></table>' +
-      '<p class="muted small">' + esc(p.shownIn) + ' Images are illustrative. Please confirm this is the right product for your project when you enquire.</p>' +
-            '<p><a href="/products/' + p.id + '/">View full product page →</a></p>' +
-      '<div class="dlg-actions"><a class="btn btn-wa" target="_blank" rel="noopener" href="' + WA.whatsappLink(WA.productMessage(p)) + '">Enquire on WhatsApp</a>' +
-      '<button class="btn btn-ghost-dark" type="button" data-add="' + p.id + '" aria-pressed="false">Add to quote list</button></div></div></div>';
+      '<img src="' +
+      p.image +
+      '" alt="' +
+      esc(p.alt) +
+      '">' +
+      '<img src="' +
+      p.inUseImage +
+      '" alt="Illustrative image of ' +
+      esc(p.name) +
+      ' in use" loading="lazy">' +
+      '</div><div class="pd-info"><p>' +
+      esc(p.description) +
+      "</p>" +
+      '<table><caption class="sr-only">Dimensions of ' +
+      esc(p.name) +
+      "</caption><tbody>" +
+      '<tr><th scope="row">Length</th><td>' +
+      d.l +
+      ' mm</td></tr><tr><th scope="row">Width</th><td>' +
+      d.w +
+      ' mm</td></tr><tr><th scope="row">Height</th><td>' +
+      d.h +
+      " mm</td></tr></tbody></table>" +
+      '<p class="muted small">' +
+      esc(p.shownIn) +
+      " Images are illustrative. Please confirm this is the right product for your project when you enquire.</p>" +
+      '<a class="btn btn-primary btn-block pd-more" href="/products/' +
+      p.id +
+      '/">View full product page <span aria-hidden="true">→</span></a>' +
+      '<div class="dlg-actions"><a class="btn btn-wa" target="_blank" rel="noopener" href="' +
+      WA.whatsappLink(WA.productMessage(p)) +
+      '">Enquire on WhatsApp</a>' +
+      '<button class="btn btn-ghost-dark" type="button" data-add="' +
+      p.id +
+      '" aria-pressed="false">Add to quote list</button></div></div></div>';
     pDlg.showModal(); updateListUI();
   }
   pDlg.addEventListener("click", e => { const add = e.target.closest("[data-add]"); if (add) toggleList(add.dataset.add); });
