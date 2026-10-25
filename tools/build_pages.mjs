@@ -108,7 +108,8 @@ const prodUrl = (p) => `/products/${p.id}/`;
 /* ---------- shared layout ---------- */
 const NAV = [
   ["Home", "/"],
-  ...catIds.map((id) => [catInfo(id).nav, catUrl(id)]),
+  ["About Us", "/#about"],
+  ["Products", "/#products"],
   ["Calculator", "/quantity-calculator/"],
   ["FAQ", "/faq/"],
   ["Contact", "/#contact"],
@@ -183,6 +184,7 @@ ${body}
 <script src="/js/products.js"></script>
 <script src="/js/whatsapp.js"></script>
 <script src="/js/page.js"></script>
+<script src="/js/nav-dropdown.js"></script>
 ${scripts.map((s) => `<script src="${s}"></script>`).join("\n")}
 </body>
 </html>
