@@ -1,4 +1,4 @@
-name: Build catalogue PDF
+name: Build catalogue PDF and pages
 
 on:
   push:
@@ -11,16 +11,22 @@ on:
       - "assets/images/**"
       - "assets/logo/**"
       - "tools/make_catalogue_pdf.py"
+      - "tools/build_pages.mjs"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build-pdf:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build static pages
+        run: node tools/build_pages.mjs
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -30,12 +36,12 @@ jobs:
           playwright install --with-deps chromium
       - name: Build PDF
         run: python tools/make_catalogue_pdf.py
-      - name: Commit PDF if it changed
+      - name: Commit generated files if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/Ashland-Product-Catalogue.pdf
+          git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "Update catalogue PDF"
+            git commit -m "Update generated pages and catalogue PDF"
             git push
           fi
