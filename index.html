@@ -90,9 +90,21 @@
           <a class="btn btn-ghost" href="#quote">Get a Quote</a>
         </div>
       </div>
-      <figure class="hero-figure">
-        <img src="assets/images/ashland-cabro-80-driveway.webp" alt="Grey concrete cabro paving laid as a driveway with kerb edging" width="1200" height="677" fetchpriority="high">
-        <figcaption class="dim-strip" aria-label="Example: Ashland Cabro 80 dimensions">
+    <figure class="hero-figure hero-slider" id="hero-slider" aria-roledescription="carousel" aria-label="Where Ashland products are used">
+        <div class="hs-stage" aria-live="off">
+          <div class="hs-slide is-active" data-product="cabro-80"><img src="assets/images/ashland-cabro-80-driveway.jpg" alt="Grey concrete cabro paving laid as a driveway with kerb edging" width="1200" height="677" fetchpriority="high"></div>
+          <div class="hs-slide" data-product="uni-80"><img data-src="assets/images/ashland-uni-80-driveway.jpg" alt="Wave-profile concrete paving forming a driveway beside a raised planter" width="1200" height="472"></div>
+          <div class="hs-slide" data-product="pavers-60"><img data-src="assets/images/ashland-pavers-60-walkway.jpg
+            " alt="Multi-colour concrete pavers forming a garden walkway" width="1004" height="565"></div>
+          <div class="hs-slide" data-product="road-kerb"><img data-src="assets/images/ashland-road-kerb-roadside.jpg" alt="Concrete kerb along the edge of a road beside a planted verge" width="1200" height="688"></div>
+          <div class="hs-slide" data-product="hb-300"><img data-src="assets/images/ashland-hb-300-site.jpg" alt="Hollow concrete blocks arranged between reinforcement bars on a building site" width="826" height="550"></div>
+          <a class="hs-tag" href="/products/cabro-80/">Ashland Cabro 80 <span aria-hidden="true">→</span></a>
+          <button class="hs-btn hs-prev" type="button" aria-label="Previous image"></button>
+          <button class="hs-btn hs-next" type="button" aria-label="Next image"></button>
+          <button class="hs-pause" type="button" aria-label="Pause slideshow"><span class="i-pause"></span><span class="i-play"></span></button>
+          <div class="hs-dots"></div>
+        </div>
+        <figcaption class="dim-strip" aria-label="Ashland Cabro 80 dimensions">
           <span><b>200</b>Length</span><span><b>100</b>Width</span><span><b>80</b>Height&nbsp;(mm)</span>
         </figcaption>
       </figure>
@@ -238,7 +250,7 @@
         <p class="note">The map link searches for the address. It is not a surveyed pin, so please call if you need directions.</p>
       </div>
       <div class="contact-card">
-        <img src="assets/images/ashland-cabro-60-driveway.webp" alt="Concrete cabro paving laid in front of a modern gate" loading="lazy" width="1200" height="450">
+        <img src="assets/images/ashland-cabro-60-driveway.jpg" alt="Concrete cabro paving laid in front of a modern gate" loading="lazy" width="1200" height="450">
         <p>Tell us the product, quantity and your location, and we will come back to you with a quotation.</p>
         <a class="btn btn-primary" href="#quote">Request a Quote</a>
       </div>
@@ -284,5 +296,6 @@
 <script src="js/menu-enhance.js"></script>
 <script src="js/nav-dropdown.js"></script>
 <script src="js/animate.js"></script>
+<script src="js/hero-slider.js"></script>
 </body>
 </html>
