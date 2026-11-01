@@ -12,7 +12,7 @@
   var dotsBox = root.querySelector(".hs-dots"),
     pauseBtn = root.querySelector(".hs-pause");
   var PRODUCTS = window.ASHLAND_PRODUCTS || [];
-  var DELAY = 5500,
+  var DELAY = 4000,
     current = 0,
     timer = null,
     userPaused = false,
