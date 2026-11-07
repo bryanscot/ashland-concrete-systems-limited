@@ -11,7 +11,7 @@
     strip = root.querySelector(".dim-strip");
   var dotsBox = root.querySelector(".hs-dots"),
     pauseBtn = root.querySelector(".hs-pause");
-  var PRODUCTS = window.ASHLAND_PRODUCTS || [];
+  var PRODUCTS = window.cm_PRODUCTS || [];
   var DELAY = 3000,
     current = 0,
     timer = null,
