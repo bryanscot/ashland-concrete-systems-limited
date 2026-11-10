@@ -8,7 +8,9 @@
 
   /* ---------- General links ---------- */
   $$("[data-wa-general]").forEach(a => (a.href = WA.whatsappLink(WA.generalMessage())));
-  $("#map-link").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(C.mapQuery);
+  const mapEl = $("#map-link");
+  if (mapEl && mapEl.getAttribute("href") === "#") mapEl.href = WA.mapLink(); // the build step normally writes the real link
+  if (C.leadCapture && $("#lead-note")) $("#lead-note").hidden = false;
   $("#year").textContent = new Date().getFullYear();
 
   function toast(msg) {
@@ -78,7 +80,7 @@
         '<input id="q-' + p.id + '" data-qty="' + p.id + '" type="text" placeholder="Qty" value="' + esc(i.quantity) + '">' +
         '<button type="button" class="link-btn" data-remove="' + p.id + '" aria-label="Remove ' + esc(p.name) + '">Remove</button></li>';
     }).join("") + '</ul>' +
-      '<div class="dlg-actions"><a class="btn btn-wa" id="send-list" href="#" target="_blank" rel="noopener">Send list on WhatsApp</a>' +
+      '<div class="dlg-actions"><a class="btn btn-wa" id="send-list" href="' + WA.whatsappLink(WA.generalMessage()) + '" target="_blank" rel="noopener">Send list on WhatsApp</a>' +
       '<a class="btn btn-ghost-dark" href="#quote" data-close>Use the quote form instead</a></div>' +
       '<p class="muted small">WhatsApp opens with your message ready. You must press Send there to complete the enquiry.</p>';
     refreshSendLink();
@@ -200,6 +202,13 @@
     pDlg.showModal(); updateListUI();
   }
   pDlg.addEventListener("click", e => { const add = e.target.closest("[data-add]"); if (add) toggleList(add.dataset.add); });
+  /* Copy of the enquiry sent to the server (Zoho CRM) in the background. Never blocks WhatsApp. */
+  function sendLead(data) {
+    try {
+      fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data), keepalive: true }).catch(function () {});
+    } catch (e) { /* ignore */ }
+  }
+
 
   /* ---------- Quote form ---------- */
   const form = $("#quote-form"), sel = $("#f-product"), result = $("#form-result");
@@ -245,6 +254,14 @@
       '<a class="btn btn-ghost-dark" href="tel:' + C.phoneTel + '">Call instead</a></div>';
     $("#copy-msg").addEventListener("click", () => copyText(msg, "Message copied"));
     window.open(link, "_blank", "noopener");
+    if (C.leadCapture) {
+      sendLead({
+        name: form.name.value.trim(), phone: form.phone.value.trim(), product: productText,
+        quantity: form.quantity.value.trim(), location: form.location.value.trim(), message: form.message.value.trim(),
+        items: listItems().map(function (i) { return i.product.name + (i.quantity ? " x " + i.quantity : ""); }).join("; "),
+        website: form.website ? form.website.value : ""
+      });
+    }
     result.focus();
   });
   ["name", "phone"].forEach(k => form[k].addEventListener("input", () => { if (form[k].getAttribute("aria-invalid") === "true") validate(false); }));

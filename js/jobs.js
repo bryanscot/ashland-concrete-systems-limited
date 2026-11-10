@@ -1,0 +1,113 @@
+/* Vacancies — content taken from "Ashland Job Opportunities and Descriptions" (Ref REV/ACF/2026).
+   Set published: false to keep a post off the website (it stays in this file for the record).
+   Posts 1, 10, 12, 13 and 14 are unpublished by default until management confirms which roles to advertise. */
+window.ASHLAND_JOBS = [
+  { n: 1, ref: "REV/ACF/1/2026", title: "Production Manager and Assistant General", published: false,
+    summary: "The officer will take end to end responsibility for the concrete paving block manufacturing facility.",
+    responsibilities: [
+      "Plant operations and daily floor management. Oversee daily production schedules, machine operations, and shift targets to ensure maximum plant yield and efficiency. Directly supervise shift supervisors, machine operators, mold changers, yard staff, and casual laborers.",
+      "Mix design & quality assurance. Formulate, test, and optimize concrete mix designs for light-duty, medium-duty, and heavy duty cabro blocks.",
+      "Equipment maintenance & technical management. Oversee preventative and corrective maintenance for hydraulic block-making machines, vibration systems, pan mixers, conveyor belts, and batching units.",
+      "Health, safety, environment & compliance. Enforce Occupational Safety and Health standards across the factory floor and curing yards."],
+    academic: ["Bachelor’s Degree or Higher National Diploma in Civil Engineering, Structural Engineering, Mechanical Engineering, Building Construction, or Construction Management.", "Masters’ degree is an added advantage."],
+    certifications: ["Certification or registration with a recognized engineering/construction professional body.", "Trained in Occupational Health and Safety.", "Background in Lean Manufacturing or Total Quality Management."],
+    experience: ["Overall experience: Minimum 4 to 6 years in concrete manufacturing, precast, or batching plant environments.", "Direct cabro experience: At least 2–3 years in a leadership or supervisory capacity within a cabro paving block factory.", "Hands-on expertise: Proven experience operating and troubleshooting semi-automatic or fully automatic hydraulic/vibration block-making machines and batching systems."] },
+
+  { n: 2, ref: "REV/ACF/2/2026", title: "Machine Operator", published: true,
+    summary: "The person is responsible for the direct execution, operation, and routine monitoring of hydraulic and vibration block making machinery. This role ensures the accurate pressing, forming, and initial demolding of high-quality paving blocks while keeping the production line running safely and efficiently.",
+    responsibilities: ["Machine set up and operation.", "Production and quality control to ensure uniform fill and density across all blocks.", "Basic maintenance and troubleshooting through performing pre-shift visual and mechanical inspections.", "Safety and yard coordination through operating within factory occupational safety and health guidelines."],
+    academic: ["Minimum education: Kenya Certificate of Secondary Education (KCSE) or equivalent secondary school certificate.", "Government Trade Test, Craft Certificate, or Artisan Certificate in Mechanical Engineering, Electrical Fitting, Plant Mechanics, or General Fitting from a TVET institution or polytechnic."],
+    certifications: [],
+    experience: ["Minimum 1 to 3 years of hands on experience in a manufacturing, construction, or precast concrete factory."] },
+
+  { n: 3, ref: "REV/ACF/3/2026", title: "Mechanical and Electrical Officer", published: true,
+    summary: "The officer ensures zero unexpected downtime across the entire automated or semi-automated production line.",
+    responsibilities: ["Preventive and corrective maintenance on vibration and mould assembly maintenance, batching and mixing plant upkeep and electrical and control systems.", "Machinery operations and calibrations.", "Equipment upgrades and fabrications.", "Spares and safety management."],
+    academic: ["Higher Diploma or Bachelor's Degree in Mechanical Engineering, Electrical/Electronic Engineering, Mechatronics Engineering, or Electromechanical Engineering.", "Diploma (KNEC/City & Guilds or equivalent) in Mechanical Engineering (Plant/Production option) or Electrical & Power Engineering."],
+    certifications: ["Registration with a relevant professional body (e.g., Engineers Board of Kenya / EBK or EPRA Electrical License Class A or B is an added advantage).", "Certification in Industrial Automation, Hydraulics, or Pneumatics.", "Formal training in Occupational Safety and Health."],
+    experience: ["3 to 5 years of hands on plant maintenance experience in a concrete manufacturing environment (Cabro/block making plant, precast concrete plant, or cement processing factory)."] },
+
+  { n: 4, ref: "REV/ACF/4/2026", title: "Equipment Operator", published: true,
+    summary: "Equipment operators in a cabro plant drive the primary production cycle by moving raw materials into the batching plant, running the hydraulic block-forming machinery, and handling freshly molded and cured blocks across the yard.",
+    responsibilities: ["Machine operation and monitoring.", "Quality control and in line production.", "Daily care maintenance and safety."],
+    academic: ["Kenya Certificate of Secondary Education (KCSE) or equivalent secondary school certificate.", "Government Trade Test (Grade III, II, or I) in Plant Operation, Mechanical Fitting, or Motor Vehicle Mechanics is highly advantageous.", "Occupational Health & Safety training: Basic certification in workplace safety, first aid, or safe material handling.", "Licensing & driving credentials (for mobile plant operators): Valid Driving License with appropriate endorsements – Class I / Special Type Stamp (for Wheel Loaders, Excavators, or Tractors) and Class G / Specialized Vehicle Stamp (for Industrial Counterbalance Forklifts)."],
+    certifications: [],
+    experience: ["2 to 4 years of proven hands on experience operating heavy equipment in concrete product manufacturing (Cabro, hollow blocks, precast elements) or heavy building construction sites."] },
+
+  { n: 5, ref: "REV/ACF/5/2026", title: "Procurement Manager / Cashier / Zoho Administrator", published: true,
+    summary: "To oversee the end to end commercial cycle of the factory through securing raw material stock (aggregates, cement, pigment, diesel), processing incoming client payments at the sales desk, and maintaining continuous digital tracking of factory inventory, financial records, and workflows using the Zoho suite.",
+    responsibilities: ["Procurement and stock control. Raw material sourcing, negotiation and purchase orders, delivery verification and inventory level management.", "Cashiering and sales counter management. Customer payment processing, invoicing and dispatch clearance, petty cash management, daily reconciliation and banking.", "Zoho administration and digitization. System configuration and maintenance, workflow automation, reporting and analytics, managing user roles, access permissions and mobile set ups for sales representatives."],
+    academic: ["Bachelor’s Degree or Higher Diploma in any of the following combined or related fields: Business Information Technology (BBIT) / Information Systems; Procurement and Supply Chain Management (with IT / Accounting minors); Accounting / Business Administration / Finance with a strong IT background."],
+    certifications: ["Certified Public Accountant: Foundation/Intermediate Level, Section 1/2, or ACCA modules.", "Membership/Registration with a supply chain body (e.g., KISM – Kenya Institute of Supplies Management).", "Zoho/IT: Zoho Certified CRM/One Administrator or demonstrated proficiency in Zoho Deluge scripting and module customization."],
+    experience: ["3 to 5 years of progressive, multi-disciplinary experience in a manufacturing, construction supply, precast concrete, or hardware/distributor environment."] },
+
+  { n: 6, ref: "REV/ACF/6/2026", title: "Book Keeper / Cashier", published: true,
+    summary: "To manage all daily sales counter transactions, maintain flawless petty cash and banking records, process factory operational invoices, and execute double-entry bookkeeping to produce accurate monthly accounts for management.",
+    responsibilities: ["Daily cashiering and counter revenue collection.", "General book keeping and accounting.", "Petty cash and factory expense management.", "Compliance and tax filing."],
+    academic: ["Diploma or Bachelor’s Degree in Business Management (Accounting/Finance option), Financial Accounting, or Business Administration.", "Secondary education: Kenya Certificate of Secondary Education (KCSE) with a strong grade in Mathematics."],
+    certifications: ["CPA (Certified Public Accountant): CPA Foundation Level / CPA Part 1 (Sections 1 & 2) minimum. Full CPA-K qualification is a strong advantage. (Mandatory professional accounting qualification.)", "Alternative professional certification: ACCA (Applied Knowledge / Applied Skills level) or ATD (Accounting Technicians Diploma)."],
+    experience: ["2 to 4 years of hands-on experience in a dual bookkeeping/cashiering role within a manufacturing plant, construction materials supply yard, hardware distributor, or busy commercial depot.", "Demonstrated history of managing high volume cash and M-Pesa transactions while simultaneously keeping general ledgers updated."] },
+
+  { n: 7, ref: "REV/ACF/7/2026", title: "Factory Accountant", published: true,
+    summary: "Acts as the financial controller and business administrator.",
+    responsibilities: ["Financial reporting and general ledger management.", "Cashflow, invoicing, receivables/payables.", "Statutory tax compliance and returns.", "Inventory valuation and analysis."],
+    academic: ["Bachelor’s Degree in Commerce (Accounting/Finance option), Business Management, Finance, or Financial Accounting.", "Masters degree in finance is an added advantage."],
+    certifications: ["CPA (Full CPA-K (Certified Public Accountant of Kenya) registration or ACCA equivalent). (Mandatory.)", "Professional membership: Active membership with ICPAK (Institute of Certified Public Accountants of Kenya) or equivalent professional accounting body is highly desirable."],
+    experience: ["3 to 5+ years of hands-on accounting experience, with at least 2 years in a manufacturing, construction supply, or heavy production environment.", "Proven track record in product costing, statutory tax filing (KRA iTax, eTIMS), inventory control, and multi channel revenue reconciliations."] },
+
+  { n: 8, ref: "REV/ACF/8/2026", title: "Information Communication and Technology (ICT) Officer", published: true,
+    summary: "The officer serves as the digital backbone of operations. This role bridges physical plant automation, office systems, network infrastructure, cybersecurity, and enterprise business tools.",
+    responsibilities: ["Enterprise software administration.", "Network hardware and infrastructure management.", "Cybersecurity, data backup and disaster recovery.", "User support, training and vendor management."],
+    academic: ["Bachelor’s Degree or Higher Diploma in Information Technology, Computer Science, Business Information Technology (BBIT), Software Engineering, or Computer Engineering."],
+    certifications: ["Networking & systems: Cisco Certified Network Associate (CCNA), CompTIA Network+, or Microsoft Certified Systems Administrator (MCSA).", "Software / ERP: Certified Administrator certifications (e.g., Zoho Certified CRM/One Administrator, QuickBooks/ERP certifications) or database management credentials.", "Cybersecurity / general IT: CompTIA Security+ or Certified Information Systems Auditor (CISA) Foundation is an added advantage."],
+    experience: ["3 to 5 years of hands-on experience as an IT Officer, Systems Administrator, or ICT Support Specialist.", "At least 2 years of experience in a manufacturing, distribution, or heavy industrial setup."] },
+
+  { n: 9, ref: "REV/ACF/9/2026", title: "ICT Intern", published: true,
+    summary: "An Information and Communications Technology (ICT) Intern Officer in a cabro (concrete paving block) manufacturing plant provides essential front-line IT support.",
+    responsibilities: ["Daily user support and help desk.", "Business software and data entry assistance.", "Network, hardware and infrastructure maintenance.", "Cyber security and data backups."],
+    academic: ["Diploma or Degree (Completed or Final Year Student) in any of the following fields: Information Technology (IT); Computer Science; Business Information Technology (BBIT); Computer Engineering / Software Engineering."],
+    certifications: ["Entry-level IT certifications such as CompTIA A+, CompTIA Network+, Cisco CCNA (In-progress/Completed), or introductory certifications in cloud/ERP platforms (e.g., Zoho, Microsoft 365, Google Workspace) are an added advantage."],
+    experience: [] },
+
+  { n: 10, ref: "REV/ACF/10/2026", title: "General Manager (Main Factory)", published: false,
+    summary: "Serves as the ultimate executive leader on-site at a cabro (concrete paving block) manufacturing plant. Reporting directly to the Board of Directors or Factory Owners, this position holds complete Profit & Loss accountability and oversees all operational, technical, financial, commercial, and administrative units, ensuring maximum plant efficiency, product quality, regulatory compliance, and market growth.",
+    responsibilities: ["Strategic leadership and profit and loss management.", "Plant operations and maintenance oversight.", "Cross departmental administration.", "People management and stakeholder relations."],
+    academic: ["Bachelor’s Degree in Engineering (Civil, Mechanical, Industrial, or Mechatronics) OR Business Administration / Commerce / Supply Chain Management.", "Master’s Degree is an added advantage: MBA (Master of Business Administration), MSc in Project Management, or MSc in Operations/Engineering Management."],
+    certifications: ["Engineering / technical: Registration with a recognized professional body (e.g., Engineers Board of Kenya / EBK, Institution of Engineers of Kenya / IEK, or equivalent).", "Management / accounting (if non-engineering background): CPA-K, ICPAK, KISM, or PMI Project Management Professional (PMP) certification.", "Safety & quality: Certification in Environmental Health and Safety, ISO 9001 Quality Management Systems, or Lean Six Sigma (Green/Black Belt)."],
+    experience: [] },
+
+  { n: 11, ref: "REV/ACF/11/2026", title: "Site and Security Manager", published: true,
+    summary: "The officer safeguards the physical factory perimeter, high-value raw material stockpiles (cement, sand, aggregates).",
+    responsibilities: ["Site access control and perimeter security.", "Loss prevention and asset protection.", "Environment, health, safety and emergency management.", "Security personnel supervision and stakeholder relations."],
+    academic: ["Bachelor’s Degree or Higher Diploma in Security Management, Criminology & Security Studies, Loss Prevention, Business Administration, or Military/Police Science."],
+    certifications: ["Security & risk certifications: Certified Protection Professional, Physical Security Professional (PSP), or Certified Security Management Professional.", "Occupational Safety & Health: Certificate or Diploma in Occupational Health and Safety, First Aid Certification, and Fire Safety Officer Certification.", "Prior service credentials: Discharge certificate or official record of honorable service from disciplined forces (e.g., Police, Military, or National Police Service) is an added advantage."],
+    experience: ["5 to 8 years of progressive security, loss prevention, and site safety experience, with at least 3 years in a Managerial or Supervisory capacity within heavy manufacturing, mining, construction materials, or large logistics/distribution yards.", "Hands-on experience managing physical security, CCTV setup, access control gates, weight check procedures, and heavy site traffic management."] },
+
+  { n: 12, ref: "REV/ACF/12/2026", title: "Chief Revenue Officer – Sales Department", published: false,
+    summary: "The Chief Revenue Officer sits at the helm of the company’s commercial strategy, unifying sales operations, business development, client relationship management, and market expansion.",
+    responsibilities: ["Revenue strategy and business development.", "Sales department leadership and operations.", "Market expansion and key account management.", "Cross functional operations and credit management."],
+    academic: ["A degree in Civil Engineering, Building/Construction Management, Business Administration, Marketing, or Economics.", "Master’s Degree is an added advantage: Master of Business Administration, Strategic Management, or a related commercial executive postgraduate qualification."],
+    certifications: [],
+    experience: ["10 to 15 years of progressive commercial experience in sales, business development, and revenue leadership within the building materials, construction, precast concrete, or heavy manufacturing industries."] },
+
+  { n: 13, ref: "REV/ACF/13/2026", title: "Technical Manager", published: false,
+    summary: "The Technical Manager serves as the technical authority of the manufacturing facility. This role bridges concrete engineering science, plant automation/mechanical maintenance, product quality control, and field-level technical consulting for clients.",
+    responsibilities: ["Concrete technology, mix and design.", "Plant maintenance, automation and engineering uptime.", "Quality assurance, testing and standard compliance.", "Technical client support and site advisory."],
+    academic: ["Bachelor of Science (B.Sc.) in Civil Engineering, Structural Engineering, Materials Science Engineering, or Mechanical Engineering.", "Master’s Degree (advantageous): M.Sc. in Civil Engineering (Concrete Technology/Materials focus) or Mechanical/Industrial Engineering."],
+    certifications: ["Full registration/accreditation with a recognized professional engineering body (e.g., Engineers Board of Kenya – EBK / Institution of Engineers of Kenya – IEK, or regional equivalent)."],
+    experience: ["8 to 12 years of progressive technical and engineering experience in concrete precast, batching plants, heavy building materials, or civil engineering construction."] },
+
+  { n: 14, ref: "REV/ACF/14/2026", title: "Corporate Head / Chief Executive Officer", published: false,
+    summary: "Corporate Head holds ultimate accountability for the strategic vision, commercial growth, operational excellence, financial performance, and governance of the cabro manufacturing enterprise.",
+    responsibilities: ["Strategic leadership and business growth.", "Operational and technical governance.", "Financial management and corporate governance.", "Stakeholders management and brand reputation."],
+    academic: ["Bachelor of Science (B.Sc.) in Civil Engineering, Mechanical/Industrial Engineering, Building/Construction Management, Business Administration, or Finance/Economics.", "Master’s Degree is an added advantage: Master of Business Administration (MBA), M.Sc. in Strategic Management, or equivalent executive business qualification."],
+    certifications: ["Governance / executive accreditation: Certified Secretary (CS) designation, Member of the Institute of Directors (IoD), or certification in Corporate Governance / Executive Leadership."],
+    experience: [] },
+
+  { n: 15, ref: "REV/ACF/15/2026", title: "Casuals and Mixers", published: true,
+    summary: "To take dual responsibility for batching raw materials and operating the concrete pan mixer, while actively executing floor support tasks including offloading wet cabro blocks, managing yard curing schedules, stacking, and truck loading. This versatile role ensures continuous concrete supply at the mixer end and smooth product handling across the production floor and curing yard.",
+    responsibilities: ["Concrete batching and mixer operation.", "Wet line offloading, stacking and yard curing.", "Material handling and dispatch support.", "Workplace safety and basic upkeep."],
+    academic: ["Minimum education: Kenya Certificate of Secondary Education (KCSE) or equivalent secondary school certificate (enabling accurate reading of mix proportions, delivery notes, and safety signage).", "Technical/vocational qualification (added advantage): Government Trade Test, Artisan Certificate, or Craft Certificate in Masonry, Building Construction, or General Fitting/Mechanics from a recognized TVET institution or polytechnic."],
+    certifications: [],
+    experience: ["Minimum 1 to 2 years of hands-on experience in a precast concrete plant, cabro paving factory, or active construction site."] }
+];

@@ -168,3 +168,36 @@ table.spec th{width:35%;color:var(--muted);font-weight:600}
   .nav .dd-item{transition:padding-left .15s ease,color .15s ease}
   .nav .dd-item:active{padding-left:.5rem;color:var(--blue-bright)}
 }
+/* ===== Careers, About proof points, map, form notes ===== */
+.form-note{font-size:.88rem;color:var(--muted);margin:.8rem 0 0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.steps-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:1.2rem 0 1.5rem}
+.step-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:var(--radius);padding:1rem 1.1rem}
+.step-card b{display:block;font:700 1.7rem/1 var(--font-display);color:var(--blue);margin-bottom:.3rem}
+.step-card h3{font-size:1.2rem;margin-bottom:.3rem}.step-card p{margin:0;color:var(--muted);font-size:.97rem}
+.career-layout{display:grid;gap:2rem}
+@media (min-width:980px){.career-layout{grid-template-columns:1.45fr 1fr;align-items:start}.career-form-wrap{position:sticky;top:96px}}
+details.job{border:1px solid var(--line);border-radius:var(--radius);background:#fff;margin-bottom:.8rem;padding:0}
+details.job>summary{padding:1rem 1.1rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem .8rem;font-size:1.05rem}
+.job-ref{font-size:.8rem;font-weight:600;color:var(--muted);background:var(--concrete);padding:.15rem .65rem;border-radius:99px}
+.job-body{padding:0 1.1rem 1.1rem}
+.job-body h4{font:700 1rem var(--font-body);color:var(--navy);margin:1rem 0 .3rem}
+.job-body ul{margin:.2rem 0 0;padding-left:1.2rem}.job-body li{margin-bottom:.35rem;color:var(--ink)}
+.job-body .btn{margin-top:1rem}
+.career-form-wrap{background:var(--concrete);padding:1.4rem;border-radius:var(--radius)}
+.career-form-wrap select,.career-form-wrap textarea{background:#fff}
+.check{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;color:var(--ink)}
+.check input{width:22px;min-height:22px;margin-top:.15rem;flex:none}
+#career-result{margin-top:1rem}
+#career-result ul{padding-left:1.2rem}#career-result h3{font-size:1.1rem;margin:.8rem 0 .3rem}
+.docs-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.2rem}
+.docs-box ul{margin:.3rem 0 0;padding-left:1.2rem}
+.proof{margin-top:2.2rem}
+.proof h3{font-size:1.6rem}
+.proof-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.proof-card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:var(--radius);padding:1rem 1.1rem}
+.proof-card h4{font:700 1.05rem var(--font-body);color:var(--navy);margin:0 0 .3rem}.proof-card p{margin:0 0 .6rem;color:var(--muted);font-size:.97rem}
+.proof-card .btn{margin-top:.2rem}
+.map-embed{margin-top:1rem;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.map-embed iframe{display:block;width:100%;height:320px;border:0}
+.gps{font-size:.95rem;color:var(--muted);margin:.8rem 0 0}
