@@ -46,5 +46,16 @@
     return out.join("\n");
   }
 
-  window.AshlandWA = { formatDims, productLabel, whatsappLink, generalMessage, productMessage, multiProductMessage, formMessage };
+  /* Map helpers: use the verified pin when coordinates exist, otherwise fall back to a text search */
+  function hasPin() { const g = C.geo || {}; return typeof g.lat === "number" && typeof g.lng === "number"; }
+  function mapLink() {
+    if (C.mapShareUrl) return C.mapShareUrl;
+    if (hasPin()) return "https://www.google.com/maps/search/?api=1&query=" + C.geo.lat + "," + C.geo.lng;
+    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(C.mapQuery);
+  }
+  function directionsLink() {
+    return hasPin() ? "https://www.google.com/maps/dir/?api=1&destination=" + C.geo.lat + "," + C.geo.lng : "";
+  }
+
+  window.AshlandWA = { formatDims, productLabel, whatsappLink, generalMessage, productMessage, multiProductMessage, formMessage, hasPin, mapLink, directionsLink };
 })();

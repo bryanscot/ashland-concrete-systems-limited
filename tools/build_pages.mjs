@@ -7,16 +7,20 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 // Set your live domain here (no trailing slash) once you own it, e.g. "https://www.ashlandconcrete.co.ke"
-const SITE_URL = process.env.SITE_URL || "https://YOUR-DOMAIN";
-const hasDomain = !SITE_URL.includes("YOUR-DOMAIN");
+let SITE_URL = "https://YOUR-DOMAIN"; // set in js/config.js (siteUrl) or with the SITE_URL environment variable
+let hasDomain = false;
 
 /* ---------- load site data ---------- */
 const ctx = vm.createContext({ window: {} });
-for (const f of ["js/config.js", "js/products.js"])
+for (const f of ["js/config.js", "js/products.js", "js/whatsapp.js", "js/jobs.js"])
   vm.runInContext(fs.readFileSync(path.join(ROOT, f), "utf8"), ctx);
 const C = ctx.window.ASHLAND_CONFIG,
   P = ctx.window.ASHLAND_PRODUCTS,
   CATLIST = ctx.window.ASHLAND_CATEGORIES;
+const WAJS = ctx.window.AshlandWA,
+  JOBS = ctx.window.ASHLAND_JOBS || [];
+SITE_URL = (process.env.SITE_URL || C.siteUrl || SITE_URL).replace(/\/+$/, "");
+hasDomain = !SITE_URL.includes("YOUR-DOMAIN");
 
 const esc = (s) =>
   String(s).replace(
@@ -173,7 +177,7 @@ ${body}
     <div><a class="footer-logo" href="/" aria-label="Home"><img src="/assets/logo/ashland-logo.webp" alt="Ashland Concrete Systems Ltd" width="900" height="604" loading="lazy"></a>
       <p>Concrete paving, hollow blocks and kerbs from Thika, Kenya.</p></div>
     <div><h2>Products</h2><ul>${catIds.map((id) => `<li><a href="${catUrl(id)}">${esc(catInfo(id).nav)}</a></li>`).join("")}<li><a href="/quantity-calculator/">Quantity calculator</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
-    <div><h2>Company</h2><ul><li><a href="/#about">About Us</a></li><li><a href="/#contact">Contact</a></li><li><a href="/privacy.html">Privacy notice</a></li><li><a href="/assets/Ashland-Product-Catalogue.pdf" download="Ashland-Product-Catalogue.pdf">Product catalogue (PDF)</a></li></ul></div>
+    <div><h2>Company</h2><ul><li><a href="/#about">About Us</a></li><li><a href="/#contact">Contact</a></li><li><a href="/careers/">Careers</a></li><li><a href="/privacy.html">Privacy notice</a></li><li><a href="/assets/Ashland-Product-Catalogue.pdf" download="Ashland-Product-Catalogue.pdf">Product catalogue (PDF)</a></li></ul></div>
     <div><h2>Reach us</h2><p>${esc(C.locationLine)}<br>${esc(C.postalLine)}</p>
       <p><a href="tel:${C.phoneTel}">${esc(C.phoneDisplay)}</a><br><a data-wa-general href="${waGeneral}" target="_blank" rel="noopener">WhatsApp</a></p></div>
   </div>
@@ -359,7 +363,7 @@ const FAQ = [
   ],
   [
     "Does the quote form send my details automatically?",
-    "No. The form prepares a message and opens WhatsApp. You must press Send in WhatsApp to complete your enquiry. This website does not store your details.",
+    "No. The form prepares a message and opens WhatsApp. You must press Send in WhatsApp to complete your enquiry. See our privacy notice for how your details are handled.",
   ],
   [
     "Can I ask about several products at once?",
@@ -448,6 +452,141 @@ ${num("c-allow", "Allowance for cuts and breakages (%)", 'value="5" max="30"')}
   );
 }
 
+/* ---------- careers page ---------- */
+const pubJobs = JOBS.filter((j) => j.published);
+const careerOnline = !!(C.leadCapture && (!C.careers || C.careers.onlinePreRegistration !== false));
+const DOCS = [
+  "Factory employment form, cover letter and curriculum vitae",
+  "Copies of your academic, trade and professional certificates (testimonials)",
+  "National ID",
+  "KRA PIN certificate",
+  "Certificate of Good Conduct",
+  "Any licence or professional registration listed for the role (for example a driving licence with the right endorsements)",
+];
+const ulist = (a) => (a && a.length ? `<ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
+const jsec = (h, a) => (a && a.length ? `<h4>${h}</h4>${ulist(a)}` : "");
+const jobHtml = (j) =>
+  `<details class="job" id="job-${j.n}"><summary><span>${esc(j.title)}</span><span class="job-ref">Ref ${esc(j.ref)}</span></summary><div class="job-body"><p>${esc(j.summary)}</p>${jsec("Key responsibilities", j.responsibilities)}${jsec("Academic qualification", j.academic)}${jsec("Professional certifications", j.certifications)}${jsec("Experience", j.experience)}<a class="btn btn-primary" href="#pre-register" data-apply-role="${esc(j.ref)}">Pre-register for this role</a></div></details>`;
+{
+  const url = "/careers/";
+  const title = `Careers and Vacancies | ${C.companyName}`;
+  const desc = trunc(`Current vacancies at ${C.companyName}, ${C.locationLine}. Read the role descriptions, pre-register your interest and learn how our on-site vetting works.`);
+  const bc = [["Home", "/"], ["Careers", null]];
+  const deadline = C.careers && C.careers.applicationDeadline ? `<p><strong>Closing date:</strong> ${esc(C.careers.applicationDeadline)}</p>` : "";
+  const interview = C.careers && C.careers.interviewInfo ? `<p><strong>Interviews:</strong> ${esc(C.careers.interviewInfo)}</p>` : "";
+  const roleOptions = pubJobs.map((j) => `<option value="${esc(j.ref)}" data-title="${esc(j.title)}">${esc(j.title)}</option>`).join("");
+  const formHtml = pubJobs.length
+    ? `<div class="career-form-wrap" id="pre-register"><h2>Pre-register</h2>
+<p class="muted">A short form to tell us you are interested. Please do not enter ID numbers or upload documents here: you will present them on site.</p>
+<form id="career-form" novalidate>
+<div class="field"><label for="cf-name">Full name <span aria-hidden="true">*</span></label><input id="cf-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name"><p class="error" id="e-name" hidden></p></div>
+<div class="field"><label for="cf-phone">Phone number <span aria-hidden="true">*</span></label><input id="cf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="e-phone"><p class="error" id="e-phone" hidden></p></div>
+<div class="field"><label for="cf-role">Vacancy <span aria-hidden="true">*</span></label><select id="cf-role" name="role" aria-describedby="e-role"><option value="">Select a vacancy</option>${roleOptions}</select><p class="error" id="e-role" hidden></p></div>
+<div class="field"><label for="cf-experience">Years of relevant experience</label><select id="cf-experience" name="experience"><option value="">Prefer not to say</option><option>Less than 1 year</option><option>1 to 3 years</option><option>3 to 5 years</option><option>More than 5 years</option></select></div>
+<div class="field"><label for="cf-notes">Machines, trade or skills (optional)</label><textarea id="cf-notes" name="notes" rows="3" maxlength="600"></textarea></div>
+<div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<div class="field"><label class="check"><input id="cf-consent" name="consent" type="checkbox" aria-describedby="e-consent"><span>I agree that ${esc(C.companyName)} may keep these details to contact me about this vacancy. <a href="/privacy.html">Privacy notice</a></span></label><p class="error" id="e-consent" hidden></p></div>
+<button class="btn btn-primary btn-block" type="submit">${careerOnline ? "Submit pre-registration" : "Prepare WhatsApp message"}</button>
+<p class="form-note">${careerOnline ? "Your details are sent to Ashland and saved in our recruitment records." : "Nothing is sent until you press Send in WhatsApp."} Only shortlisted candidates will be contacted.</p>
+<div class="form-result" id="career-result" tabindex="-1" hidden></div></form></div>`
+    : "";
+  write(url, layout({ url, title, desc, scripts: ["/js/jobs.js", "/js/careers.js"],
+    jsonld: hasDomain ? [crumbLd(bc)] : [],
+    body: `<section class="page-hero"><div class="wrap">${crumbs(bc)}<h1>Careers at Ashland</h1><p class="lead">${esc(C.companyName)} seeks to recruit qualified, competent, result-oriented and self-driven individuals to fill the vacant posts below.</p></div></section>
+<section class="section"><div class="wrap"><h2>How to apply</h2>
+<div class="steps-grid">
+<div class="step-card"><b>1</b><h3>Pre-register</h3><p>Pick a vacancy and send your name, phone number and experience. It takes about a minute.</p></div>
+<div class="step-card"><b>2</b><h3>Prepare your documents</h3><p>Gather the documents in the list below. Hands-on trade assessment and plant safety vetting happen at the factory.</p></div>
+<div class="step-card"><b>3</b><h3>Deliver and be vetted</h3><p>Deliver hard copies to the office of the Corporate Head / Chief Executive Officer at ${esc(C.locationLine)}. Only shortlisted candidates are contacted and invited for interview.</p></div></div>
+${deadline}${interview}
+<div class="docs-box"><strong>Documents you may be asked to present</strong><ul id="docs-list">${DOCS.map((d) => `<li>${esc(d)}</li>`).join("")}</ul></div>
+<p class="note">Online pre-registration helps us plan and does not replace the on-site process.</p></div></section>
+<section class="section section-alt"><div class="wrap career-layout"><div><h2>Vacancies</h2>${pubJobs.length ? pubJobs.map(jobHtml).join("") : `<p>No vacancies are advertised at the moment. Please check again soon, or call <a href="tel:${C.phoneTel}">${esc(C.phoneDisplay)}</a>.</p>`}</div>${formHtml}</div></section>` }));
+}
+
+/* ---------- privacy page ---------- */
+{
+  const cap = !!C.leadCapture;
+  const html = layout({ url: "/privacy.html", title: `Privacy notice | ${C.companyName}`,
+    desc: `How ${C.companyName} handles the details you enter in the quotation and careers forms on this website.`,
+    body: `<section class="page-hero compact"><div class="wrap">${crumbs([["Home", "/"], ["Privacy notice", null]])}<h1>Privacy notice</h1></div></section>
+<section class="section"><div class="wrap prose">
+<p>This notice explains what happens to the details you enter on this website.</p>
+<h2>The quotation form</h2>
+<p>When you complete the form, your browser prepares a WhatsApp message from what you typed (name, phone number, product, quantity, location and message) and opens WhatsApp. The message is only sent to us if you press Send in WhatsApp, after which WhatsApp's own terms and privacy policy apply.</p>
+${cap ? `<p>The website also sends the same details to our customer records (a CRM service) so that we can follow up on your enquiry even if you do not press Send in WhatsApp.</p>` : `<p>This website does not receive or store what you type in the form.</p>`}
+<h2>Careers pre-registration</h2>
+${cap && careerOnline ? `<p>When you pre-register for a vacancy, we receive your name, phone number, the vacancy, your experience level and any skills you mention, and save them in our recruitment records so that we can contact shortlisted candidates. We do not ask for ID numbers or other documents online: they are checked in person at the factory. If the online submission fails, the form offers a WhatsApp message instead.` : `<p>The pre-registration form prepares a WhatsApp message with your name, phone number, chosen vacancy, experience level and notes. Nothing is sent until you press Send in WhatsApp.`}</p>
+<h2>Quote list</h2>
+<p>Products you add to your quote list are kept in your browser's session storage so the list survives a page reload. They are cleared when you close the tab${cap ? ", and are only sent to us if you include them in a quotation enquiry" : " and are never sent anywhere by this website"}.</p>
+<h2>Third-party services</h2>
+<p>This website loads fonts from Google Fonts${C.mapEmbedUrl ? " and shows an embedded Google Map on the contact section" : ""}. Links to WhatsApp and Google Maps open those services only when you click them. These services have their own privacy policies.</p>
+<h2>Your choices</h2>
+<p>You can ask us to correct or delete the details you have given us by calling <a href="tel:${C.phoneTel}">${esc(C.phoneDisplay)}</a> or messaging us on <a data-wa-general href="${waGeneral}" target="_blank" rel="noopener">WhatsApp</a>.</p>
+<h2>Contact</h2>
+<p>${esc(C.companyName)}, ${esc(C.locationLine)}. ${esc(C.postalLine)}.</p></div></section>` });
+  fs.writeFileSync(path.join(ROOT, "privacy.html"), html);
+}
+
+/* ---------- patch the hand-written home page (only marked blocks, WhatsApp links and URLs) ---------- */
+const pinOk = WAJS.hasPin();
+const aboutFacts = C.about || {};
+const warnings = [];
+function localBusinessLd() {
+  const street = String(C.locationLine).split(",").slice(0, 2).join(",").trim();
+  const poBox = (String(C.postalLine).match(/\b(\d{3,})\b/) || [])[1];
+  const ld = { "@context": "https://schema.org", "@type": "LocalBusiness", name: C.companyName, telephone: C.phoneTel,
+    address: { "@type": "PostalAddress", streetAddress: street, addressLocality: C.addressLocality || "", ...(C.postalCode ? { postalCode: C.postalCode } : {}), ...(poBox ? { postOfficeBoxNumber: poBox } : {}), addressCountry: "KE" } };
+  if (hasDomain) { ld.url = abs("/"); ld.image = abs("/assets/images/ashland-banner.jpg"); ld.logo = abs("/assets/logo/ashland-logo.png"); }
+  if (pinOk) ld.geo = { "@type": "GeoCoordinates", latitude: C.geo.lat, longitude: C.geo.lng };
+  if (C.serviceAreas && C.serviceAreas.length) ld.areaServed = C.serviceAreas.map((n) => ({ "@type": "Place", name: n }));
+  return ld;
+}
+function proofHtml() {
+  const card = (h, t) => `<article class="proof-card"><h4>${esc(h)}</h4><p>${esc(t)}</p></article>`;
+  const techMsg = wa(`${greet}I would like technical information (specifications and available test data) for the following product: `);
+  return `<div class="wrap proof"><h3>Quality, compliance and capability</h3><div class="proof-grid">
+${card("KRA eTIMS", "We issue eTIMS-compliant tax documentation.")}
+${aboutFacts.equipment ? card("Manufacturing", aboutFacts.equipment) : ""}
+${aboutFacts.standards ? card("Standards", aboutFacts.standards) : ""}
+${aboutFacts.strength ? card("Product strength", aboutFacts.strength) : ""}
+${aboutFacts.reach ? card("Reach", aboutFacts.reach) : ""}
+<article class="proof-card"><h4>Technical data on request</h4><p>Need sizes, tolerances or strength data for a tender or RFQ? Ask us and we will share what is available for your product.</p><a class="btn btn-wa" href="${techMsg}" target="_blank" rel="noopener">Request technical data</a></article>
+</div></div>`;
+}
+function patchIndex() {
+  const file = path.join(ROOT, "index.html");
+  if (!fs.existsSync(file)) return;
+  let html = fs.readFileSync(file, "utf8");
+  const original = html;
+  const block = (name, inner) => {
+    const re = new RegExp(`(<!--${name}:START-->)[\\s\\S]*?(<!--${name}:END-->)`);
+    if (!re.test(html)) { console.warn(`NOTE: marker ${name} not found in index.html`); return; }
+    html = html.replace(re, (m, a, b) => `${a}\n${inner}\n${b}`);
+  };
+  html = html.replace(/(data-wa-general href=")[^"]*(")/g, (m, a, b) => a + waGeneral + b);
+  if (hasDomain) {
+    for (const re of [/(<link rel="canonical" href=")https?:\/\/[^\/"]+/, /(<meta property="og:url"\s+content=")https?:\/\/[^\/"]+/, /(<meta property="og:image"\s+content=")https?:\/\/[^\/"]+/, /(<meta name="twitter:image"\s+content=")https?:\/\/[^\/"]+/])
+      html = html.replace(re, (m, a) => a + SITE_URL);
+  }
+  block("JSONLD", `<script type="application/ld+json">${JSON.stringify(localBusinessLd())}</script>`);
+  block("ABOUT-PROOF", proofHtml());
+  const dir = WAJS.directionsLink();
+  block("CONTACT-MAP-BUTTONS", dir
+    ? `<a class="btn btn-primary" href="${dir}" target="_blank" rel="noopener">Get directions</a>\n<a class="btn btn-ghost-dark" id="map-link" href="${WAJS.mapLink()}" target="_blank" rel="noopener">View on Google Maps</a>`
+    : `<a class="btn btn-ghost-dark" id="map-link" href="${WAJS.mapLink()}" target="_blank" rel="noopener">Open in Google Maps</a>`);
+  const embed = /^https:\/\/www\.google\.com\/maps\/embed/.test(C.mapEmbedUrl || "") ? `<div class="map-embed"><iframe src="${esc(C.mapEmbedUrl)}" title="Map showing the ${esc(C.companyName)} factory yard" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>` : "";
+  block("CONTACT-MAP-NOTE", pinOk
+    ? `<p class="gps">GPS: ${C.geo.lat}, ${C.geo.lng}</p>${embed}`
+    : `<p class="note">The map link searches for the address. It is not a surveyed pin, so please call if you need directions.</p>`);
+  if (html !== original) fs.writeFileSync(file, html);
+  if (!pinOk) warnings.push("No verified yard coordinates yet (config.geo): the map still uses a text search and shows the 'not a surveyed pin' note.");
+  if (!hasDomain) warnings.push("No production domain yet (config.siteUrl): canonical/social URLs on the home page still point at the old address, and sitemap.xml/robots.txt were not updated.");
+  for (const k of ["standards", "strength"]) if (!aboutFacts[k]) warnings.push(`About block: '${k}' is empty, so that proof point is not shown (fill it only with documented facts).`);
+  if (!pubJobs.length) warnings.push("Careers: no vacancy is marked published in js/jobs.js.");
+}
+patchIndex();
+
 /* ---------- sitemap ---------- */
 if (hasDomain) {
   const today = new Date().toISOString().slice(0, 10);
@@ -457,8 +596,10 @@ if (hasDomain) {
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${abs(u)}</loc><lastmod>${today}</lastmod></url>`).join("\n")}\n</urlset>\n`,
   );
   console.log(`sitemap.xml written with ${urls.length} URLs`);
+  fs.writeFileSync(path.join(ROOT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${abs("/sitemap.xml")}\n`);
 } else
   console.warn(
     "NOTE: SITE_URL not set, so canonical tags and sitemap.xml were skipped.",
   );
 console.log(`Built ${written.length} pages:`, written.join("  "));
+for (const w of warnings) console.warn("TODO: " + w);
