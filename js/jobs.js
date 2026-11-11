@@ -34,7 +34,7 @@ window.ASHLAND_JOBS = [
     certifications: [],
     experience: ["2 to 4 years of proven hands on experience operating heavy equipment in concrete product manufacturing (Cabro, hollow blocks, precast elements) or heavy building construction sites."] },
 
-  { n: 5, ref: "REV/ACF/5/2026", title: "Procurement Manager / Cashier / Zoho Administrator", published: true,
+  { n: 5, ref: "REV/ACF/5/2026", title: "Procurement Manager / Cashier / Zoho Administrator", published: false,
     summary: "To oversee the end to end commercial cycle of the factory through securing raw material stock (aggregates, cement, pigment, diesel), processing incoming client payments at the sales desk, and maintaining continuous digital tracking of factory inventory, financial records, and workflows using the Zoho suite.",
     responsibilities: ["Procurement and stock control. Raw material sourcing, negotiation and purchase orders, delivery verification and inventory level management.", "Cashiering and sales counter management. Customer payment processing, invoicing and dispatch clearance, petty cash management, daily reconciliation and banking.", "Zoho administration and digitization. System configuration and maintenance, workflow automation, reporting and analytics, managing user roles, access permissions and mobile set ups for sales representatives."],
     academic: ["Bachelor’s Degree or Higher Diploma in any of the following combined or related fields: Business Information Technology (BBIT) / Information Systems; Procurement and Supply Chain Management (with IT / Accounting minors); Accounting / Business Administration / Finance with a strong IT background."],
@@ -55,14 +55,14 @@ window.ASHLAND_JOBS = [
     certifications: ["CPA (Full CPA-K (Certified Public Accountant of Kenya) registration or ACCA equivalent). (Mandatory.)", "Professional membership: Active membership with ICPAK (Institute of Certified Public Accountants of Kenya) or equivalent professional accounting body is highly desirable."],
     experience: ["3 to 5+ years of hands-on accounting experience, with at least 2 years in a manufacturing, construction supply, or heavy production environment.", "Proven track record in product costing, statutory tax filing (KRA iTax, eTIMS), inventory control, and multi channel revenue reconciliations."] },
 
-  { n: 8, ref: "REV/ACF/8/2026", title: "Information Communication and Technology (ICT) Officer", published: true,
+  { n: 8, ref: "REV/ACF/8/2026", title: "Information Communication and Technology (ICT) Officer", published: false,
     summary: "The officer serves as the digital backbone of operations. This role bridges physical plant automation, office systems, network infrastructure, cybersecurity, and enterprise business tools.",
     responsibilities: ["Enterprise software administration.", "Network hardware and infrastructure management.", "Cybersecurity, data backup and disaster recovery.", "User support, training and vendor management."],
     academic: ["Bachelor’s Degree or Higher Diploma in Information Technology, Computer Science, Business Information Technology (BBIT), Software Engineering, or Computer Engineering."],
     certifications: ["Networking & systems: Cisco Certified Network Associate (CCNA), CompTIA Network+, or Microsoft Certified Systems Administrator (MCSA).", "Software / ERP: Certified Administrator certifications (e.g., Zoho Certified CRM/One Administrator, QuickBooks/ERP certifications) or database management credentials.", "Cybersecurity / general IT: CompTIA Security+ or Certified Information Systems Auditor (CISA) Foundation is an added advantage."],
     experience: ["3 to 5 years of hands-on experience as an IT Officer, Systems Administrator, or ICT Support Specialist.", "At least 2 years of experience in a manufacturing, distribution, or heavy industrial setup."] },
 
-  { n: 9, ref: "REV/ACF/9/2026", title: "ICT Intern", published: true,
+  { n: 9, ref: "REV/ACF/9/2026", title: "ICT Intern", published: false,
     summary: "An Information and Communications Technology (ICT) Intern Officer in a cabro (concrete paving block) manufacturing plant provides essential front-line IT support.",
     responsibilities: ["Daily user support and help desk.", "Business software and data entry assistance.", "Network, hardware and infrastructure maintenance.", "Cyber security and data backups."],
     academic: ["Diploma or Degree (Completed or Final Year Student) in any of the following fields: Information Technology (IT); Computer Science; Business Information Technology (BBIT); Computer Engineering / Software Engineering."],
