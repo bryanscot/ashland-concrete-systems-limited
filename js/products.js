@@ -128,3 +128,5 @@ window.ASHLAND_CATEGORIES = [
   { id: "blocks", label: "Hollow blocks" },
   { id: "kerbs", label: "Kerbs" }
 ];
+
+window.cm_PRODUCTS = window.ASHLAND_PRODUCTS;
