@@ -141,7 +141,7 @@ ${hasDomain ? `<link rel="canonical" href="${abs(url)}">` : "<!-- add SITE_URL i
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
-${hasDomain ? `<meta property="og:url" content="${abs(url)}">\n<meta property="og:image" content="${abs(asset(image || "assets/images/ashland-banner.png"))}">` : ""}
+${hasDomain ? `<meta property="og:url" content="${abs(url)}">\n<meta property="og:image" content="${abs(asset(image || "assets/images/ashland-banner.webp"))}">` : ""}
 <link rel="icon" type="image/png" sizes="48x48" href="/assets/logo/favicon-48.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -537,7 +537,7 @@ function localBusinessLd() {
   const poBox = (String(C.postalLine).match(/\b(\d{3,})\b/) || [])[1];
   const ld = { "@context": "https://schema.org", "@type": "LocalBusiness", name: C.companyName, telephone: C.phoneTel,
     address: { "@type": "PostalAddress", streetAddress: street, addressLocality: C.addressLocality || "", ...(C.postalCode ? { postalCode: C.postalCode } : {}), ...(poBox ? { postOfficeBoxNumber: poBox } : {}), addressCountry: "KE" } };
-  if (hasDomain) { ld.url = abs("/"); ld.image = abs("/assets/images/ashland-banner.jpg"); ld.logo = abs("/assets/logo/ashland-logo.png"); }
+  if (hasDomain) { ld.url = abs("/"); ld.image = abs("/assets/images/ashland-banner.webp"); ld.logo = abs("/assets/logo/ashland-logo.png"); }
   if (pinOk) ld.geo = { "@type": "GeoCoordinates", latitude: C.geo.lat, longitude: C.geo.lng };
   if (C.serviceAreas && C.serviceAreas.length) ld.areaServed = C.serviceAreas.map((n) => ({ "@type": "Place", name: n }));
   return ld;
